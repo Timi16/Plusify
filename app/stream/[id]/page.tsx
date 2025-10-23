@@ -1,27 +1,28 @@
-import * as Player from "@livepeer/react/player";
+'use client'
 
-export default function StreamPlayer({ src }: { src: any }) {
-  if (!src) {
-    return <div>No stream available.</div>;
-  }
+import { Player } from '@livepeer/react'
+import { use } from 'react'
+
+export default function StreamDetailPage({ params }: { params: Promise<{ playbackId: string }> }) {
+  const { playbackId } = use(params)
 
   return (
-    <Player.Root src={src}>
-      <Player.Container className="aspect-video bg-black rounded-lg overflow-hidden">
-        <Player.Video className="w-full h-full" />
-        <Player.LoadingIndicator>
-          <div>Loading...</div>
-        </Player.LoadingIndicator>
-        <Player.ErrorIndicator matcher={() => true}>
-          <div>Error loading stream.</div>
-        </Player.ErrorIndicator>
-        <Player.Controls>
-          <Player.PlayPauseTrigger />
-          <Player.MuteTrigger />
-          <Player.FullscreenTrigger />
-          {/* Add more controls as needed */}
-        </Player.Controls>
-      </Player.Container>
-    </Player.Root>
-  );
+    <div className="min-h-screen bg-background p-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="aspect-video bg-black rounded-lg overflow-hidden">
+          <Player
+            title="Live Stream"
+            playbackId={playbackId}
+            showPipButton
+            autoPlay
+            muted
+          />
+        </div>
+        <div className="mt-4">
+          <h1 className="text-2xl font-bold">Live Stream</h1>
+          <p className="text-muted-foreground">Currently streaming...</p>
+        </div>
+      </div>
+    </div>
+  )
 }
