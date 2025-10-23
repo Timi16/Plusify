@@ -113,7 +113,7 @@ export default function StreamDetailPage({ params }: StreamPageProps) {
                     }}
                     theme={{
                       borderStyles: {
-                        containerBorderStyle: 'hidden',
+                        containerBorderStyle: 'solid',
                       },
                       colors: {
                         accent: '#8b5cf6',
