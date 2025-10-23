@@ -10,7 +10,7 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Plusify - Watch. Predict. Earn.",
   description: "The future of StreamFi - Live streaming meets prediction markets",
-  generator: "v0.app",
+  generator: "Timicoding",
 }
 
 export default function RootLayout({
