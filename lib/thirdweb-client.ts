@@ -1,6 +1,6 @@
 import { createThirdwebClient } from "thirdweb"
 import { inAppWallet, createWallet } from "thirdweb/wallets"
-import { avalancheTestnet } from "./avalanche-testnet"
+import { avalancheTestnet, solanaDevnet } from "./avalanche-testnet"
 
 const clientId = process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID || "cab0f839b00d345e2f54dfc1177888ed"
 const secretKey =
@@ -14,7 +14,8 @@ export const client = createThirdwebClient({
 
 export const defaultChain = avalancheTestnet
 
-export const wallets = [
+// EVM wallets (for Avalanche)
+export const evmWallets = [
   inAppWallet({
     auth: {
       options: ["google", "facebook", "telegram", "email", "x", "passkey"],
@@ -27,3 +28,19 @@ export const wallets = [
   createWallet("io.zerion.wallet"),
   createWallet("com.trustwallet.app"),
 ]
+
+// Solana wallets
+export const solanaWallets = [
+  createWallet("app.phantom"), // Phantom
+  // createWallet("com.solflare"), // Solflare
+  createWallet("app.backpack"), // Backpack
+  // inAppWallet also supports Solana
+  inAppWallet({
+    auth: {
+      options: ["google", "email", "passkey"],
+    },
+  }),
+]
+
+// Combined wallets array
+export const wallets = [...evmWallets, ...solanaWallets]

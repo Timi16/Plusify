@@ -1,6 +1,6 @@
 import { defineChain } from "thirdweb"
 
-// Define Avalanche C-Chain Testnet
+// Keep your existing Avalanche chain
 export const avalancheTestnet = defineChain({
   id: 43113,
   name: "Avalanche C-Chain Testnet",
@@ -19,7 +19,32 @@ export const avalancheTestnet = defineChain({
   testnet: true,
 })
 
-export const SUPPORTED_CHAIN_ID = 43113
+// Add Solana chains
+// export const solanaMainnet = defineChain({
+//   id: 900, // Solana uses non-standard chain IDs
+//   name: "Solana Mainnet",
+//   nativeCurrency: {
+//     name: "Solana",
+//     symbol: "SOL",
+//     decimals: 9,
+//   },
+//   rpc: "https://api.mainnet-beta.solana.com",
+//   testnet: false,
+// })
+
+export const solanaDevnet = defineChain({
+  id: 901,
+  name: "Solana Devnet",
+  nativeCurrency: {
+    name: "Solana",
+    symbol: "SOL",
+    decimals: 9,
+  },
+  rpc: "https://api.devnet.solana.com",
+  testnet: true,
+})
+
+export const SUPPORTED_CHAIN_IDS = [43113, 901] // Support both chains
 
 export const isSupportedChain = (chainId: number | undefined): chainId is number =>
-  chainId !== undefined && Number(chainId) === SUPPORTED_CHAIN_ID
+  chainId !== undefined && SUPPORTED_CHAIN_IDS.includes(Number(chainId))
